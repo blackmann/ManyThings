@@ -25,16 +25,34 @@ struct TodoItem: View {
     .frame(maxWidth: .infinity)
     .backgroundOnHover(foregroundColor: item.done ? .secondary : .primary)
     .contextMenu {
-      Button(role: .destructive, action: {}) {
+      Button(role: .destructive, action: {
+        context.delete(item)
+      }) {
         Text("Delete")
       }
       
-      Button(role: .destructive, action: {}) {
-        Text("Move to Planned")
+      if item.category != Category.now.rawValue {
+        Button(role: .destructive, action: {
+          moveTo(category: .now)
+        }) {
+          Text("Move to Now")
+        }
       }
       
-      Button(role: .destructive, action: {}) {
-        Text("Move to ideas")
+      if item.category != Category.planned.rawValue {
+        Button(role: .destructive, action: {
+          moveTo(category: .planned)
+        }) {
+          Text("Move to Planned")
+        }
+      }
+      
+      if item.category != Category.ideas.rawValue {
+        Button(role: .destructive, action: {
+          moveTo(category: .ideas)
+        }) {
+          Text("Move to Ideas")
+        }
       }
     }
     .onTapGesture {
@@ -45,23 +63,15 @@ struct TodoItem: View {
         //
       }
     }
-
-  }
-}
-
-struct TodoItem_Previews: PreviewProvider {
-  
-  struct TodoItemDemo: View {
     
-    var body: some View {
-      List {
-        
-      }
-    }
   }
   
-  static var previews: some View {
-    TodoItemDemo()
-      .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+  private func moveTo(category: Category) {
+    self.item.category = category.rawValue
+    do {
+      try context.save()
+    } catch {
+      //
+    }
   }
 }
