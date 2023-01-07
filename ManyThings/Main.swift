@@ -23,11 +23,13 @@ struct Main: View {
           self.addTodo()
         }
       
-      ProgressView("Progress 3/10", value: 3, total: 10)
+      Progress()
       
       TodoItems(category: activeTab)
       
       Divider()
+      
+      Footer()
     }.padding(.all, 8)
   }
   

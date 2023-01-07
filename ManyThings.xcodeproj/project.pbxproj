@@ -13,6 +13,8 @@
 		4943778A29698B8300152D8B /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4943778929698B8300152D8B /* Main.swift */; };
 		4943778C29698C7600152D8B /* Tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4943778B29698C7600152D8B /* Tabs.swift */; };
 		4943778E29698CC800152D8B /* TodoItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4943778D29698CC800152D8B /* TodoItems.swift */; };
+		4943779229699BA000152D8B /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4943779129699BA000152D8B /* Progress.swift */; };
+		4943779429699C4900152D8B /* Footer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4943779329699C4900152D8B /* Footer.swift */; };
 		49CADF5329619CB2005E6B57 /* ManyThingsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CADF5229619CB2005E6B57 /* ManyThingsApp.swift */; };
 		49CADF5729619CB3005E6B57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49CADF5629619CB3005E6B57 /* Assets.xcassets */; };
 		49CADF5A29619CB3005E6B57 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49CADF5929619CB3005E6B57 /* Preview Assets.xcassets */; };
@@ -47,6 +49,8 @@
 		4943778929698B8300152D8B /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		4943778B29698C7600152D8B /* Tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabs.swift; sourceTree = "<group>"; };
 		4943778D29698CC800152D8B /* TodoItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItems.swift; sourceTree = "<group>"; };
+		4943779129699BA000152D8B /* Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
+		4943779329699C4900152D8B /* Footer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Footer.swift; sourceTree = "<group>"; };
 		49CADF4F29619CB2005E6B57 /* ManyThings.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ManyThings.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49CADF5229619CB2005E6B57 /* ManyThingsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManyThingsApp.swift; sourceTree = "<group>"; };
 		49CADF5629619CB3005E6B57 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -162,6 +166,8 @@
 				4943778429696A7E00152D8B /* TodoItem.swift */,
 				4943778B29698C7600152D8B /* Tabs.swift */,
 				4943778D29698CC800152D8B /* TodoItems.swift */,
+				4943779129699BA000152D8B /* Progress.swift */,
+				4943779329699C4900152D8B /* Footer.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -302,8 +308,10 @@
 				494377882969862E00152D8B /* Category.swift in Sources */,
 				4943778529696A7E00152D8B /* TodoItem.swift in Sources */,
 				4943778A29698B8300152D8B /* Main.swift in Sources */,
+				4943779229699BA000152D8B /* Progress.swift in Sources */,
 				4943778E29698CC800152D8B /* TodoItems.swift in Sources */,
 				49CADF5329619CB2005E6B57 /* ManyThingsApp.swift in Sources */,
+				4943779429699C4900152D8B /* Footer.swift in Sources */,
 				4943778C29698C7600152D8B /* Tabs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
