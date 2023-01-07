@@ -31,6 +31,10 @@ struct TodoItems: View {
       ForEach(items) {item in
         TodoItem(item: item)
       }
+      
+      if items.isEmpty {
+        Text("You got nothing going for you! 🫡")
+      }
     }
   }
 }

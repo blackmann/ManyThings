@@ -23,7 +23,7 @@ struct Main: View {
           self.addTodo()
         }
       
-      Progress()
+      Progress(category: activeTab)
       
       TodoItems(category: activeTab)
       
