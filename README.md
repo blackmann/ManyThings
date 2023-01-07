@@ -10,4 +10,4 @@ Inspired by 1Thing by [sindresorhus](https://github.com/sindresorhus). 1Thing al
 
 ⚠️ To launch app for the first time, right click and select open.
 
-Check the releases page for the latest package. Simply drag package to your `Applications` folder and open.
+Check the [releases page](https://github.com/blackmann/ManyThings/releases) for the latest package. Simply drag package to your `Applications` folder and open.
