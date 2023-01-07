@@ -11,17 +11,21 @@ import SwiftUI
 struct ManyThingsApp: App {
     let persistenceController = PersistenceController.shared
   
-  @State var category = 0
+  @AppStorage("activeTab") var activeTab = "now"
   @State var entry = ""
 
     var body: some Scene {
       MenuBarExtra("Many Things", systemImage: "list.bullet.rectangle.portrait.fill") {
         VStack(alignment: .leading) {
-          Picker("", selection: $category) {
+          Picker("", selection: $activeTab) {
             Text("Now")
+              .tag("now")
+            
             Text("Planned")
+              .tag("planned")
+            
             Text("Ideas")
-              
+              .tag("ideas")
           }
           .pickerStyle(.segmented)
           .labelsHidden()
@@ -32,75 +36,8 @@ struct ManyThingsApp: App {
           ProgressView("Progress 3/10", value: 3, total: 10)
           
           VStack(alignment: .leading, spacing: 0) {
-            HStack {
-              Image(systemName: "square")
-              
-              Text("Prepare for next week race")
-            }
-            .frame(maxWidth: .infinity)
-            .backgroundOnHover()
-            .contextMenu {
-              Button(role: .destructive, action: {}) {
-                Text("Delete")
-              }
-              
-              Button(role: .destructive, action: {}) {
-                Text("Move to Planned")
-              }
-              
-              Button(role: .destructive, action: {}) {
-                Text("Move to ideas")
-              }
-            }
             
             
-            
-            HStack {
-              Image(systemName: "square")
-              
-              Text("Finish the book on computational thinking").frame(maxWidth: .infinity)
-            }
-            .frame(maxWidth: .infinity)
-            .backgroundOnHover()
-            .contextMenu {
-              Button(role: .destructive, action: {}) {
-                Text("Delete")
-              }
-              
-              Button(role: .destructive, action: {}) {
-                Text("Move to Planned")
-              }
-              
-              Button(role: .destructive, action: {}) {
-                Text("Move to ideas")
-              }
-            }
-            
-            
-            
-            HStack {
-              Image(systemName: "multiply.square")
-              
-              Text("Call harumi")
-              Spacer()
-            }
-            .frame(maxWidth: .infinity)
-                        .foregroundColor(.secondary)
-            .strikethrough()
-            .backgroundOnHover()
-            .contextMenu {
-              Button(role: .destructive, action: {}) {
-                Text("Delete")
-              }
-              
-              Button(role: .destructive, action: {}) {
-                Text("Move to Planned")
-              }
-              
-              Button(role: .destructive, action: {}) {
-                Text("Move to ideas")
-              }
-            }
           }
           
           Divider()
