@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Tab: String {
+enum Category: String {
   case now = "now"
   case planned = "planned"
   case ideas = "ideas"

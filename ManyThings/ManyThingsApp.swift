@@ -9,40 +9,13 @@ import SwiftUI
 
 @main
 struct ManyThingsApp: App {
-    let persistenceController = PersistenceController.shared
+  let persistenceController = PersistenceController.shared
   
-  @AppStorage("activeTab") var activeTab = "now"
-  @State var entry = ""
-
-    var body: some Scene {
-      MenuBarExtra("Many Things", systemImage: "list.bullet.rectangle.portrait.fill") {
-        VStack(alignment: .leading) {
-          Picker("", selection: $activeTab) {
-            Text("Now")
-              .tag(Tab.now)
-            
-            Text("Planned")
-              .tag(Tab.now)
-            
-            Text("Ideas")
-              .tag(Tab.ideas)
-          }
-          .pickerStyle(.segmented)
-          .labelsHidden()
-          
-          TextField("What to do", text: $entry)
-            .textFieldStyle(.roundedBorder)
-          
-          ProgressView("Progress 3/10", value: 3, total: 10)
-          
-          VStack(alignment: .leading, spacing: 0) {
-            
-            
-          }
-          
-          Divider()
-        }.padding(.all, 8)
-      }
-      .menuBarExtraStyle(.window)
+  var body: some Scene {
+    MenuBarExtra("Many Things", systemImage: "list.bullet.rectangle.portrait.fill") {
+      Main()
+        .environment(\.managedObjectContext, persistenceController.container.viewContext)
     }
+    .menuBarExtraStyle(.window)
+  }
 }

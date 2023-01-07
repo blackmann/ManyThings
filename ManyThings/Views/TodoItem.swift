@@ -9,17 +9,21 @@ import Foundation
 import SwiftUI
 
 struct TodoItem: View {
+  @Environment(\.managedObjectContext) var context
+  
+  @ObservedObject var item: Todo
+  
   var body: some View {
     HStack {
-      Image(systemName: "multiply.square")
+      Image(systemName: item.done ? "x.square" : "square")
+        .fontWeight(.medium)
       
-      Text("Call harumi")
+      Text(item.title!)
       Spacer()
     }
+    .strikethrough(item.done)
     .frame(maxWidth: .infinity)
-    .foregroundColor(.secondary)
-    .strikethrough()
-    .backgroundOnHover()
+    .backgroundOnHover(foregroundColor: item.done ? .secondary : .primary)
     .contextMenu {
       Button(role: .destructive, action: {}) {
         Text("Delete")
@@ -33,6 +37,31 @@ struct TodoItem: View {
         Text("Move to ideas")
       }
     }
+    .onTapGesture {
+      item.setValue(!item.done, forKey: "done")
+      do {
+        try context.save()
+      } catch {
+        //
+      }
+    }
 
+  }
+}
+
+struct TodoItem_Previews: PreviewProvider {
+  
+  struct TodoItemDemo: View {
+    
+    var body: some View {
+      List {
+        
+      }
+    }
+  }
+  
+  static var previews: some View {
+    TodoItemDemo()
+      .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
   }
 }

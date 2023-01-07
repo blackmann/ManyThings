@@ -15,17 +15,20 @@ extension NSTextField {
   }
 }
 
-// Modified from: https://nilcoalescing.com/blog/ViewModifierForACustomHoverEffectInSwiftUI/
+// Adapted from: https://nilcoalescing.com/blog/ViewModifierForACustomHoverEffectInSwiftUI/
 struct BackgroundOnHover: ViewModifier {
   @State private var isHovered = false
+  
+  var foregroundColor: Color
   
   func body(content: Content) -> some View {
     content
       .padding(.all, 4)
       .background(isHovered ? .accentColor : Color.clear)
+      .foregroundColor(isHovered ? .white : self.foregroundColor)
       .clipShape(
         RoundedRectangle(
-          cornerRadius: 4,
+          cornerRadius: 6,
           style: .continuous
         )
       )
@@ -38,7 +41,19 @@ struct BackgroundOnHover: ViewModifier {
 }
 
 extension View {
-  func backgroundOnHover() -> some View {
-    self.modifier(BackgroundOnHover())
+  func backgroundOnHover(foregroundColor: Color = .primary) -> some View {
+    self.modifier(BackgroundOnHover(foregroundColor: foregroundColor))
+  }
+  
+  
+  // https://stackoverflow.com/a/57685253/4803261
+  @ViewBuilder
+  func `if`<Content: View>(_ conditional: Bool, content: (Self) -> Content) -> some View {
+    if conditional {
+      content(self)
+    } else {
+      self
+    }
   }
 }
+

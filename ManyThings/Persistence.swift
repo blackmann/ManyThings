@@ -7,14 +7,19 @@
 
 import CoreData
 
+let tabs = [Category.now, Category.planned, Category.ideas]
+
 struct PersistenceController {
     static let shared = PersistenceController()
 
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<5 {
-            let newItem = TodoItem()
+        for i in 0..<12 {
+//            let newItem = Todo()
+//          newItem.title = "Todo \(i)"
+//          newItem.createdAt = Date()
+//          newItem.category = tabs[i % 3].rawValue
         }
         do {
             try viewContext.save()
