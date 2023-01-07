@@ -19,13 +19,13 @@ struct ManyThingsApp: App {
         VStack(alignment: .leading) {
           Picker("", selection: $activeTab) {
             Text("Now")
-              .tag("now")
+              .tag(Tab.now)
             
             Text("Planned")
-              .tag("planned")
+              .tag(Tab.now)
             
             Text("Ideas")
-              .tag("ideas")
+              .tag(Tab.ideas)
           }
           .pickerStyle(.segmented)
           .labelsHidden()
