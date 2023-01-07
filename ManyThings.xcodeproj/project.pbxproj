@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		490561962969B2BE003A2331 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 490561952969B2BE003A2331 /* LaunchAtLogin */; };
+		490561982969B502003A2331 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490561972969B502003A2331 /* CloseButton.swift */; };
 		4943778329695D2200152D8B /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4943778229695D2200152D8B /* View+Extensions.swift */; };
 		4943778529696A7E00152D8B /* TodoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4943778429696A7E00152D8B /* TodoItem.swift */; };
 		494377882969862E00152D8B /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494377872969862E00152D8B /* Category.swift */; };
@@ -43,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		490561972969B502003A2331 /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		4943778229695D2200152D8B /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		4943778429696A7E00152D8B /* TodoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItem.swift; sourceTree = "<group>"; };
 		494377872969862E00152D8B /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -70,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				490561962969B2BE003A2331 /* LaunchAtLogin in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,6 +172,7 @@
 				4943778D29698CC800152D8B /* TodoItems.swift */,
 				4943779129699BA000152D8B /* Progress.swift */,
 				4943779329699C4900152D8B /* Footer.swift */,
+				490561972969B502003A2331 /* CloseButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -188,6 +193,9 @@
 			dependencies = (
 			);
 			name = ManyThings;
+			packageProductDependencies = (
+				490561952969B2BE003A2331 /* LaunchAtLogin */,
+			);
 			productName = ManyThings;
 			productReference = 49CADF4F29619CB2005E6B57 /* ManyThings.app */;
 			productType = "com.apple.product-type.application";
@@ -260,6 +268,9 @@
 				Base,
 			);
 			mainGroup = 49CADF4629619CB2005E6B57;
+			packageReferences = (
+				490561942969B2BE003A2331 /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */,
+			);
 			productRefGroup = 49CADF5029619CB2005E6B57 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -308,6 +319,7 @@
 				494377882969862E00152D8B /* Category.swift in Sources */,
 				4943778529696A7E00152D8B /* TodoItem.swift in Sources */,
 				4943778A29698B8300152D8B /* Main.swift in Sources */,
+				490561982969B502003A2331 /* CloseButton.swift in Sources */,
 				4943779229699BA000152D8B /* Progress.swift in Sources */,
 				4943778E29698CC800152D8B /* TodoItems.swift in Sources */,
 				49CADF5329619CB2005E6B57 /* ManyThingsApp.swift in Sources */,
@@ -630,6 +642,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		490561942969B2BE003A2331 /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin-Modern";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		490561952969B2BE003A2331 /* LaunchAtLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 490561942969B2BE003A2331 /* XCRemoteSwiftPackageReference "LaunchAtLogin-Modern" */;
+			productName = LaunchAtLogin;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		49CADF5D29619CB3005E6B57 /* ManyThings.xcdatamodeld */ = {

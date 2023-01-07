@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import LaunchAtLogin
 
 struct Main: View {
   @Environment(\.managedObjectContext) private var context
@@ -29,8 +30,17 @@ struct Main: View {
       
       Divider()
       
+      CloseButton()
+        .backgroundOnHover()
+      
+      Divider()
+      
       Footer()
-    }.padding(.all, 8)
+    }
+    .padding(.all, 8)
+    .onAppear {
+      LaunchAtLogin.isEnabled = true
+    }
   }
   
   private func addTodo() {
