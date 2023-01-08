@@ -12,7 +12,9 @@ import LaunchAtLogin
 struct Main: View {
   @Environment(\.managedObjectContext) private var context
   @AppStorage("activeTab") private var activeTab = Category.now.rawValue
-  @State var entry = ""
+  @State private var entry = ""
+  
+  @Binding var currentItem: String
   
   var body: some View {
     VStack(alignment: .leading) {
@@ -30,8 +32,13 @@ struct Main: View {
       
       Divider()
       
-      CloseButton()
-        .backgroundOnHover()
+      VStack(spacing: 0) {
+        CloseButton()
+          .backgroundOnHover()
+        
+        PreferencesButton()
+          .backgroundOnHover()
+      }
       
       Divider()
       

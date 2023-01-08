@@ -9,11 +9,26 @@ import SwiftUI
 
 @main
 struct ManyThingsApp: App {
-  let persistenceController = PersistenceController.shared
+  private let persistenceController = PersistenceController.shared
+  @State private  var currentTodo = ""
+  
+  @AppStorage("menubar") var showInMenuBar = false
   
   var body: some Scene {
-    MenuBarExtra("Many Things", systemImage: "list.bullet.rectangle.portrait.fill") {
-      Main()
+    Settings {
+      SettingsForm()
+    }
+    
+    MenuBarExtra("ManyThings",
+                 systemImage: "list.bullet.rectangle.portrait.fill",
+                 isInserted: .constant(!showInMenuBar)) {
+      Main(currentItem: $currentTodo)
+        .environment(\.managedObjectContext, persistenceController.container.viewContext)
+    }
+    .menuBarExtraStyle(.window)
+    
+    MenuBarExtra("ManyThings", isInserted: .constant(showInMenuBar)) {
+      Main(currentItem: $currentTodo)
         .environment(\.managedObjectContext, persistenceController.container.viewContext)
     }
     .menuBarExtraStyle(.window)

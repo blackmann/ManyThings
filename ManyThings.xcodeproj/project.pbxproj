@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		490561962969B2BE003A2331 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 490561952969B2BE003A2331 /* LaunchAtLogin */; };
 		490561982969B502003A2331 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490561972969B502003A2331 /* CloseButton.swift */; };
+		4905619A296A8B6F003A2331 /* PreferencesButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49056199296A8B6F003A2331 /* PreferencesButton.swift */; };
+		4905619C296A8D02003A2331 /* SettingsForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905619B296A8D02003A2331 /* SettingsForm.swift */; };
 		4943778329695D2200152D8B /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4943778229695D2200152D8B /* View+Extensions.swift */; };
 		4943778529696A7E00152D8B /* TodoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4943778429696A7E00152D8B /* TodoItem.swift */; };
 		494377882969862E00152D8B /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494377872969862E00152D8B /* Category.swift */; };
@@ -46,6 +48,8 @@
 
 /* Begin PBXFileReference section */
 		490561972969B502003A2331 /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
+		49056199296A8B6F003A2331 /* PreferencesButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesButton.swift; sourceTree = "<group>"; };
+		4905619B296A8D02003A2331 /* SettingsForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsForm.swift; sourceTree = "<group>"; };
 		4943778229695D2200152D8B /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		4943778429696A7E00152D8B /* TodoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItem.swift; sourceTree = "<group>"; };
 		494377872969862E00152D8B /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -173,6 +177,8 @@
 				4943779129699BA000152D8B /* Progress.swift */,
 				4943779329699C4900152D8B /* Footer.swift */,
 				490561972969B502003A2331 /* CloseButton.swift */,
+				49056199296A8B6F003A2331 /* PreferencesButton.swift */,
+				4905619B296A8D02003A2331 /* SettingsForm.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -321,9 +327,11 @@
 				4943778A29698B8300152D8B /* Main.swift in Sources */,
 				490561982969B502003A2331 /* CloseButton.swift in Sources */,
 				4943779229699BA000152D8B /* Progress.swift in Sources */,
+				4905619C296A8D02003A2331 /* SettingsForm.swift in Sources */,
 				4943778E29698CC800152D8B /* TodoItems.swift in Sources */,
 				49CADF5329619CB2005E6B57 /* ManyThingsApp.swift in Sources */,
 				4943779429699C4900152D8B /* Footer.swift in Sources */,
+				4905619A296A8B6F003A2331 /* PreferencesButton.swift in Sources */,
 				4943778C29698C7600152D8B /* Tabs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
