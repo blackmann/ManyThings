@@ -40,15 +40,24 @@ struct Main: View {
     .padding(.all, 8)
     .onAppear {
       LaunchAtLogin.isEnabled = true
+      Indexer.setIndices(context)
     }
   }
   
   private func addTodo() {
+    let fetchRequest = Todo.fetchRequest()
+    fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Todo.index, ascending: false)]
+    
+    guard let count = try? context.count(for: fetchRequest) else {
+      return
+    }
+    
     withAnimation(.easeOut(duration: 0.2)) {
       let todo = Todo(context: context)
       todo.title = self.entry
       todo.category = self.activeTab
       todo.createdAt = Date()
+      todo.index = Int32(count)
       
       do {
         try context.save()

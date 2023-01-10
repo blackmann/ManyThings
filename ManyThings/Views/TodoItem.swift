@@ -12,47 +12,61 @@ struct TodoItem: View {
   @Environment(\.managedObjectContext) var context
   
   @ObservedObject var item: Todo
+  var dragMode: DragMode = .none
   
   var body: some View {
-    HStack {
-      Image(systemName: item.done ? "x.square" : "square")
-        .fontWeight(.medium)
-      
-      Text(item.title!)
-      Spacer()
-    }
-    .strikethrough(item.done)
-    .frame(maxWidth: .infinity)
-    .backgroundOnHover(foregroundColor: item.done ? .secondary : .primary)
-    .contextMenu {
-      Button(role: .destructive, action: {
-        context.delete(item)
-      }) {
-        Text("Delete")
+    VStack(spacing: 0) {
+      if self.dragMode == .hoverUpper {
+        PlaceIndicator()
       }
       
-      if item.category != Category.now.rawValue {
+      HStack {
+        Image(systemName: item.done ? "x.square" : "square")
+          .fontWeight(.medium)
+        
+        Text(item.title!)
+        Spacer()
+      }
+      .strikethrough(item.done)
+      .frame(maxWidth: .infinity)
+      .backgroundOnHover(enabled: dragMode == .none,
+                         foregroundColor: item.done ? .secondary : .primary)
+      .contextMenu {
         Button(role: .destructive, action: {
-          moveTo(category: .now)
+          let index = item.index
+          context.delete(item)
+          Indexer.shiftIndices(context, from: index)
         }) {
-          Text("Move to Now")
+          Text("Delete")
+        }
+        
+        if item.category != Category.now.rawValue {
+          Button(role: .destructive, action: {
+            moveTo(category: .now)
+          }) {
+            Text("Move to Now")
+          }
+        }
+        
+        if item.category != Category.planned.rawValue {
+          Button(role: .destructive, action: {
+            moveTo(category: .planned)
+          }) {
+            Text("Move to Planned")
+          }
+        }
+        
+        if item.category != Category.ideas.rawValue {
+          Button(role: .destructive, action: {
+            moveTo(category: .ideas)
+          }) {
+            Text("Move to Ideas")
+          }
         }
       }
       
-      if item.category != Category.planned.rawValue {
-        Button(role: .destructive, action: {
-          moveTo(category: .planned)
-        }) {
-          Text("Move to Planned")
-        }
-      }
-      
-      if item.category != Category.ideas.rawValue {
-        Button(role: .destructive, action: {
-          moveTo(category: .ideas)
-        }) {
-          Text("Move to Ideas")
-        }
+      if self.dragMode == .hoverLower {
+        PlaceIndicator()
       }
     }
     .onTapGesture {
@@ -73,5 +87,15 @@ struct TodoItem: View {
     } catch {
       //
     }
+  }
+}
+
+struct PlaceIndicator: View {
+  
+  var body: some View {
+    Rectangle()
+      .frame(height: 2)
+      .frame(maxWidth: .infinity)
+      .foregroundColor(.accentColor)
   }
 }

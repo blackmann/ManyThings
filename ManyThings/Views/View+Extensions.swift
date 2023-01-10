@@ -19,13 +19,14 @@ extension NSTextField {
 struct BackgroundOnHover: ViewModifier {
   @State private var isHovered = false
   
+  var enabled = true
   var foregroundColor: Color
   
   func body(content: Content) -> some View {
     content
       .padding(.all, 4)
-      .background(isHovered ? .accentColor : Color.clear)
-      .foregroundColor(isHovered ? .white : self.foregroundColor)
+      .background(enabled && isHovered ? .accentColor : Color.clear)
+      .foregroundColor(enabled && isHovered ? .white : self.foregroundColor)
       .clipShape(
         RoundedRectangle(
           cornerRadius: 6,
@@ -41,8 +42,8 @@ struct BackgroundOnHover: ViewModifier {
 }
 
 extension View {
-  func backgroundOnHover(foregroundColor: Color = .primary) -> some View {
-    self.modifier(BackgroundOnHover(foregroundColor: foregroundColor))
+  func backgroundOnHover(enabled: Bool = true, foregroundColor: Color = .primary) -> some View {
+    self.modifier(BackgroundOnHover(enabled: enabled, foregroundColor: foregroundColor))
   }
   
   
