@@ -16,21 +16,25 @@ struct Indexer {
   static func setIndices(_ context: NSManagedObjectContext) {
     let fetchRequest = Todo.fetchRequest()
     fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Todo.createdAt, ascending: false)]
-    
-    do {
-      let items = try fetchRequest.execute()
-      if let first = items.first, first.index > -1 {
-        return
+        
+    context.perform {
+      do {
+        let items = try fetchRequest.execute()
+        
+        if let first = items.first, first.index > -1 {
+          return
+        }
+        
+        var index: Int32 = 0
+        items.forEach { item in
+          item.setValue(index, forKey: "index")
+          index += 1
+        }
+        
+        try context.save()
+      } catch {
+        //
       }
-      var index: Int32 = 0
-      items.forEach { item in
-        item.index = index
-        index += 1
-      }
-      
-      try context.save()
-    } catch {
-      //
     }
   }
   
@@ -44,15 +48,17 @@ struct Indexer {
     fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Todo.index, ascending: true)]
     fetchRequest.predicate = NSPredicate(format: "index > %i", from)
     
-    do {
-      let items = try fetchRequest.execute()
-      items.forEach { item in
-        item.index = item.index - 1
+    context.perform {
+      do {
+        let items = try fetchRequest.execute()
+        items.forEach { item in
+          item.index = item.index - 1
+        }
+        
+        try context.save()
+      } catch {
+        //
       }
-      
-      try context.save()
-    } catch {
-      //
     }
   }
 }

@@ -14,7 +14,7 @@ struct Hover {
 }
 
 struct TodoItems: View {
-  
+  @Environment(\.managedObjectContext) var context
   @FetchRequest private var items: FetchedResults<Todo>
   
   @State private var dragging: Todo? = nil
@@ -45,6 +45,7 @@ struct TodoItems: View {
           }
           .onDrop(of: [.text],
                   delegate: TodoDropDelegate(todo: item,
+                                             first: item == items.first,
                                              dragging: self.$dragging,
                                              hover: self.$hover) { completeDrop(valid: $0) })
       }
@@ -72,14 +73,51 @@ struct TodoItems: View {
   }
   
   private func completeDrop(valid: Bool) {
-    guard let hover = self.hover, let dragging = self.dragging else {
+    guard valid, let hover = self.hover, let dragging = self.dragging else {
+      self.resetDrag()
       return
     }
     
-    if valid {
-      // if
+    let fetchRequest = Todo.fetchRequest()
+    fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Todo.index, ascending: true)]
+    
+    // only the topmost item can have .hoverUpper, so there an extra shift down
+    // because the top item moved down
+    let extraMove: Int32 = hover.position == .hoverUpper ? 1 : 0
+    context.perform {
+      do {
+        let todos = try fetchRequest.execute()
+        todos.forEach { item in
+          item.index = item.index + extraMove
+          // move anything below `dragging` up, to fill up its space
+           if item.index > dragging.index {
+            item.index = item.index - 1
+           }
+          
+          // move everything below the placeholder down one level to make space
+          // for `dragging` to be inserted
+           if item.index > hover.item.index {
+            item.index = item.index + 1
+           }
+        }
+        
+        // `extraMove * 2`, why? because `dragging` needs to move down first if
+        // the first item dropped down.
+        // ie, if extraMove == 1, extraMove += 1
+        // if extraMove == 0 (no moving down)
+        dragging.index = hover.item.index + 1 - (extraMove * 2)
+        
+        try context.save()
+      } catch {
+        //
+        print(error)
+      }
     }
     
+    self.resetDrag()
+  }
+  
+  private func resetDrag() {
     self.hover = nil
     self.dragging = nil
   }
@@ -87,6 +125,7 @@ struct TodoItems: View {
 
 struct TodoDropDelegate: DropDelegate {
   var todo: Todo
+  var first: Bool
   @Binding var dragging: Todo?
   @Binding var hover: Hover?
   var onDrop: (Bool) -> ()
@@ -98,9 +137,10 @@ struct TodoDropDelegate: DropDelegate {
   
   func dropUpdated(info: DropInfo) -> DropProposal? {
     // the height of a row is around 30 units, so I'm hardcoding to upper region as 10
-    if (info.location.y <= 10) {
+    // also, you can only place above the first item
+    if (first && info.location.y <= 10) {
       self.hover = Hover(item: self.todo, position: .hoverUpper)
-    } else {
+    } else if (info.location.y > 10) {
       self.hover = Hover(item: self.todo, position: .hoverLower)
     }
     
@@ -109,7 +149,7 @@ struct TodoDropDelegate: DropDelegate {
   
   
   func performDrop(info: DropInfo) -> Bool {
-    guard let dragging = self.dragging, dragging != todo else {
+    guard let dragging = self.dragging, dragging != todo, !dragging.done else {
       self.onDrop(false)
       return false
     }

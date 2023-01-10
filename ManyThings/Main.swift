@@ -46,26 +46,36 @@ struct Main: View {
   
   private func addTodo() {
     let fetchRequest = Todo.fetchRequest()
-    fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Todo.index, ascending: false)]
+    fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Todo.index, ascending: true)]
     
-    guard let count = try? context.count(for: fetchRequest) else {
-      return
-    }
-    
-    withAnimation(.easeOut(duration: 0.2)) {
-      let todo = Todo(context: context)
-      todo.title = self.entry
-      todo.category = self.activeTab
-      todo.createdAt = Date()
-      todo.index = Int32(count)
-      
+    context.perform {
       do {
-        try context.save()
+        var lastIndex: Int32 = -1
+        let items = try fetchRequest.execute()
+        if let last = items.last {
+          lastIndex = last.index
+        }
+        
+        withAnimation(.easeOut(duration: 0.2)) {
+          let todo = Todo(context: context)
+          todo.title = self.entry
+          todo.category = self.activeTab
+          todo.createdAt = Date()
+          todo.index = lastIndex + 1
+          
+          do {
+            try context.save()
+          } catch {
+            //
+          }
+          
+          self.entry = ""
+        }
       } catch {
-        //
+        print(error)
       }
-      
-      self.entry = ""
     }
+    
+    
   }
 }
